@@ -1,0 +1,64 @@
+name: Environment Deployment
+run-name: Deploy to ${{ inputs.env }} by ${{ github.actor }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      env:
+        description: "Choose the environment"
+        required: true
+        default: qa
+        type: choice
+        options:
+          - qa
+          - dev
+          - prod
+
+jobs:
+  prod-job:
+    if: ${{ inputs.env == 'prod' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Say hello from production
+        run: echo "Hello from PROD" > message.txt
+
+      - name: Display message file
+        run: cat message.txt
+
+      - name: What files are here?"
+        run: ls -al
+
+  dev-job:
+    if: ${{ inputs.env == 'dev' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Say hello from development
+        run: echo "Hello from DEV" > message.txt
+
+      - name: Display message file
+        run: cat message.txt
+
+      - name: What files are here?"
+        run: ls -al
+
+  qa-job:
+    if: ${{ inputs.env == 'qa' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+        
+      - name: Say hello from QA
+        run: echo "Hello from QA" > message.txt
+
+      - name: Display message file
+        run: cat message.txt
+
+      - name: What files are here?"
+        run: ls -al
