@@ -1,0 +1,21 @@
+name: Task-workflow-CI
+run-name: ${{github.actor}} testing the workflow
+
+on: 
+  push: 
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ] 
+  workflow_dispatch:
+
+jobs:
+    build-and-run:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout repo code 
+              uses: actions/checkout@v7
+              
+            - name: setting up Python
+              uses: actions/setup-python@v7
+              with:
+                python-version: '3.13'

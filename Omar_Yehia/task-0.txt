@@ -1,0 +1,11 @@
+1- pushing to main or PR
+
+2- check linting , scan for vulnerability , build and tag the docker image , login to docker hub and push it into the hub 
+
+3- set up new env to start the test and install the needed python version and install dependencies 
+
+4- Docker image 
+
+5- for env you can have multiple (prod,env,pre-prod,testing)
+
+6- Linting
