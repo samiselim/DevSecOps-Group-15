@@ -1,0 +1,6 @@
+1- test the code before merging then on main to build and publish the Docker image 
+2- # test # build # Security # push # Deploy &&& parallel ==> test can run here 
+3- 1- checkout code  2- set python  3- install libraries  4-run & report
+4- single deployable is Docker image of gha-calculator API 
+5- Development and testing through staging the last stage is production to real users 
+6- unit tests should run early ro detect bugs before building Docker image  

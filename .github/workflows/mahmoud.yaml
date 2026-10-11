@@ -1,0 +1,30 @@
+name: simple workflow
+run-name: Workflow triggered manually by ${{ github.actor }}
+on :
+  workflow_dispatch:
+    inputs:
+      env:
+        type: choice
+        default: qa
+        options:
+          - dev
+          - prod
+
+jobs:
+  dev-job:
+    if: inputs.env == 'dev'
+    name: first job
+    runs-on: ubuntu-latest
+    steps:
+      - name: say hello
+        run: echo "Hello from job1"
+
+  prod-job:
+    name: second job
+    if: inputs.env == 'prod'
+    runs-on: ubuntu-latest
+    steps:
+      - name: say goodbye
+        run: echo "Hello from job2"
+      - name: what files are here?
+        run: ls -la

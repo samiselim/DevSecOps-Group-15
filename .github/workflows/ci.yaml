@@ -1,0 +1,27 @@
+name: python calculator CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  run-calculator:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+      - name: set up python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: run calculator
+        run: python3 calculator.py
+        
