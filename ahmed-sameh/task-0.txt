@@ -1,0 +1,28 @@
+1:
+    - Git commits
+    - PR Requests
+    - PR Merges
+
+2:
+    - Build
+    - Push image to registry
+    - Test
+    - Migrate DB
+    - Deploy to environment
+    - Purge CDN Cache (frontend-specific)
+
+3:
+    - Checkout code
+    - Install testing tools
+    - Pull image from registry
+    - Run tests from the code repo on the image
+    - Generate report and output as artifact
+
+4: The application image (or the build directory if not containerized)
+
+5:
+    - Dev
+    - Staging 
+    - Prod (Needs human approval)
+
+6: The build job, if the code doesn't work then no point in moving forward

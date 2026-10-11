@@ -1,0 +1,26 @@
+name: sameh-ci-workflow
+run-name: " {{ github.actor }} - Sameh Python CI Workflow"
+
+on:
+    push: 
+        branches: [main]
+    pull_request:
+        branches: [main]
+    workflow_dispatch:
+
+
+
+jobs:
+  run-calculator:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'
+
+      - name: Run calculator.py
+        run: cd ahmed-sameh && python3 calculator.py

@@ -1,0 +1,33 @@
+name: sameh-build-workflow
+run-name: " {{ github.actor }} - Sameh Build Workflow"
+
+on:
+  workflow_dispatch:
+    inputs:
+      env:
+        type: choice
+        description: 'Select the environment to deploy to'
+        default: dev
+        options:
+          - dev
+          - staging
+          - prod
+
+jobs:
+  dev-job:
+    runs-on: ubuntu-latest
+    if: inputs.env == 'dev'
+    steps:
+      - name: Message
+        run: echo "Hello from the dev environment!" | tee dev.log
+      - name: Cat message
+        run: cat dev.log
+
+  prod-job:
+    runs-on: ubuntu-latest
+    if: inputs.env == 'prod'
+    steps:
+      - name: Message
+        run: echo "Hello from the prod environment!" | tee prod.log
+      - name: Cat message
+        run: cat prod.log
