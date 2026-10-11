@@ -1,0 +1,59 @@
+1. Triggers
+
+   
+
+    pull_request (to main): Triggers tests and security scans to validate changes before merging.   
+
+    push (to main): Triggers the full pipeline to build, package, and deploy.   
+
+2. Jobs
+
+   
+
+    Jobs to create: test, build-and-push, deploy-staging, deploy-production.
+
+    Parallel: test and security/linting scans can run in parallel.
+
+    Wait for others: build-and-push waits for test to pass; deployment jobs wait for build-and-push to complete successfully.
+
+3. Steps (for the Test Job)
+
+   
+
+    Checkout Code: actions/checkout
+
+       
+
+    Set up Python: actions/setup-python
+
+       
+
+    Install Dependencies: pip install -r requirements.txt
+
+       
+
+    Run Unit Tests: pytest
+
+       
+
+4. Artifact
+
+   
+
+    The Docker Image (e.g., tagged and pushed to Docker Hub or Amazon ECR).   
+
+5. Environments
+
+   
+
+    Staging / QA: Deployed automatically after a successful build.   
+
+    Production: Requires human approval (manual environment review/gate) before deployment.   
+
+6. Fail Fast
+
+   
+
+    test / Linting should run first.   
+
+    Why: Running fast automated tests first catches errors quickly and saves compute time/cost before performing expensive tasks like Docker builds or deployments.
