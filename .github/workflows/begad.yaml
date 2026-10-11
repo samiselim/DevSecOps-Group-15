@@ -1,0 +1,39 @@
+name: build-workflow-begad
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select the environment'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - staging
+          - production
+jobs:
+  prod-job:
+    runs-on: ubuntu-latest
+    if: github.event.inputs.environment == 'production'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build and deploy to production
+        run: |
+          echo "Building and deploying to production environment
+          touch /tmp/deploy.log
+          echo 'Deployment to production completed successfully' >> /tmp/deploy.log
+          ls -l /tmp/deploy.logs
+          # Add your build and deployment commands here
+  dev-job:
+    runs-on: ubuntu-latest
+    if: github.event.inputs.environment == 'dev'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build and deploy to development
+        run: |
+          echo "Building and deploying to development environment"
+            
