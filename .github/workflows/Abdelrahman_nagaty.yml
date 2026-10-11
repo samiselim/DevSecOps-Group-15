@@ -20,6 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: dev
     steps:
+      - name: checkout
+        uses: actions/checkout@v7
       - name: echo dev
         run: echo "runing by nagaty@dev"
       - name: list files
