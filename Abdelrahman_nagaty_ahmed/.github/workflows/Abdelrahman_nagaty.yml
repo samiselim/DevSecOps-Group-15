@@ -1,0 +1,37 @@
+name: deploy
+
+run-name: Deploy  by @${{ github.actor }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      env:
+        description: "env"
+        required: true
+        default: dev
+        type: choice
+        options:
+          - dev
+          - prod
+
+jobs:
+  dev:
+    if: ${{ inputs.env == 'dev' }}
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - name: echo dev
+        run: echo "runing by nagaty@dev" > myecho.md
+      - name: Display dev
+        run: cat ./myecho.md
+
+  prod:
+    if: ${{ inputs.env == 'prod' }}
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+     
+      - name: echo prod
+        run: echo "runing by nagaty@prod" > myecho.md
+      - name: Display prod
+        run: cat ./myecho.md
