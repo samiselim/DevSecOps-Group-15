@@ -1,0 +1,49 @@
+name: abdelrahmanelhossini
+run-name: abdelrahmanelhossini ${{ github.run_number }}
+on: 
+  workflow_dispatch:
+    inputs:
+      env:
+        type: choice
+        default: 'qa'
+        options:
+          - 'dev'
+          - 'prod'
+      
+jobs:
+  dev:
+    if: inputs.env == 'dev'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Write to file
+        run: |
+          echo "abdelrahmanelhossini dev" > message.txt
+
+      - name: Read file
+        run: cat message.txt
+  prod:
+    if: inputs.env == 'prod'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Write to file
+        run: |
+          echo "abdelrahmanelhossini prod" > message.txt
+
+      - name: Read file
+        run: cat message.txt

@@ -1,0 +1,6 @@
+1 - pull request and push events 
+2- check code quality - bulid - test - sec scan 
+3- download repo - install the required langauage - install dependencies -configuration - test 
+4- docker image
+5- automatic deployment after ci - automatic deployment after test - deployment after human approvals --- human approval ensure app is stable and ready for release 
+6-chack code quality or rollback  
