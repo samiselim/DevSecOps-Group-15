@@ -1,0 +1,39 @@
+name: build-workflow_NoureldeenAllama
+run-name: Build Workflow for Noureldeen Allama
+on:
+  workflow_dispatch:
+    inputs:
+      env:
+        type: choice
+        default: qa
+        options:
+          - dev
+          - prod  
+
+
+
+jobs:
+  prod-job:
+    runs-on: ubuntu-latest
+    if : github.event.inputs.env == 'prod'
+    steps:
+
+        
+      #### clones the repository to the runner machine
+      
+      - name: checkout repository
+        uses: actions/checkout@v3
+
+      - name: echo "This is the production job"
+        run: echo "Running production job"
+
+      - name: create file
+        run: echo "This is a production file" > prod_file.txt
+
+      - name: show file content
+        run: cat prod_file.txt 
+
+      - name: list files
+        run: ls -la
+
+

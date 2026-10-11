@@ -1,0 +1,22 @@
+1- When it comes to Triggers, we could make a simple PR (Pull Request) or even a PE (Push Event) to be the main trigger to initiate the pipeline. 
+
+2- The Jobs, I think, would be listed as follows (briefly):
+
+- we will start from the testing phase
+- installing the Python Packs/Libs
+- making sure all Dependencies are there
+- testing the API before initiation
+- writing & applying the code/app
+- running SonarCube to analyze the code and make sure it is free of syntax error (Code Logic and Code Quality)
+- running an OWASP dependency check
+- push to pre-prod
+- make the Docker Image
+- run Trivy & make Image Hardening
+
+3- The Steps will be under the Jobs
+
+4- The Artifact would be The Docker Image
+
+5- The Env would be Staging (on GitHub)
+
+6- The Fail Fast would be would of course be a failure in applying the code itself or having something wrong in the dependencies or logic. Even some in the security
