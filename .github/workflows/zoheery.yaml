@@ -1,0 +1,44 @@
+name: zoheery-workflow
+run-name: "${{ github.actor }}"
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Target environment
+        type: choice
+        default: dev
+        options:
+          - dev
+          - prod
+
+jobs:
+  dev-job:
+    if: ${{ (github.event.inputs.environment || 'dev') == 'dev' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout step
+        uses: actions/checkout@v7
+      - name: setup of Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.13t'
+      - name: Run calculator
+        run: python3 calculator.py
+
+  prod-job:
+    if: ${{ (github.event.inputs.environment || 'dev') == 'prod' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout step
+        uses: actions/checkout@v7
+      - name: setup of Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.13t'
+      - name: Run calculator
+        run: python3 calculator.py
