@@ -1,0 +1,17 @@
+name: learn-github-actions
+run-name: ${{ github.actor }} running a Calc on GitHub Actions
+on: 
+    pull_request:
+    push:
+        branches: [main]
+    workflow_dispatch:
+jobs:
+  run-calc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Run calculator
+        run: python3 "Marko Emil"/Calculator.py
