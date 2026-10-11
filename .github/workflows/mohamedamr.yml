@@ -1,0 +1,28 @@
+name: first-workflow
+on:
+  workflow_dispatch:
+    inputs:
+      env:
+        type: choice
+        options:
+          - dev
+          - prod
+jobs:
+  prod-job:
+    runs-on: ubuntu-latest
+    if: inputs.env == 'prod'
+    steps:
+    - name: Run prod job
+      run: |
+        echo "This is the prod job" > mohamed.txt
+        cat mohamed.txt
+  dev-job:
+    runs-on: ubuntu-latest
+    if: inputs.env == 'dev'
+    steps:
+    - name: Run dev job
+      run: |
+        echo "This is the dev job"
+        ls -la
+    
+      
