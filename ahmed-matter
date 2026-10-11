@@ -1,0 +1,19 @@
+1- TriggersPull Requests (PRs): Trigger the CI pipeline (linting and testing) to validate code quality, syntax, and test coverage before code is allowed to merge into the main branch.
+Pushes to main: Trigger the full CI/CD pipeline (linting, testing, Docker image building, pushing to a registry, and deploying).  
+
+2- JobsJobs to create:lint (code formatting and static analysis)   test (running unit and integration tests)   build    (building and pushing the Docker image)   deploy (deploying the container to target environments)   Execution Flow:lint and test can run in parallel to speed up feedback.
+build must wait for both lint and test to successfully pass.
+deploy must wait for build to successfully complete.   
+
+3- Steps (for the Test Job)Since the runner starts completely empty, the step sequence for the test job must be:Checkout code: Pull the repository source code onto the runner.
+ Set up Python: Install the required Python runtime version.   
+ Install dependencies: Install project requirements (e.g., pip install -r requirements.txt).   
+ Run tests: Execute the test suite using a testing framework like pytest.   
+
+4- ArtifactSingle deployable artifact: A packaged Docker container image containing the Python web API, its runtime dependencies, and application source code, tagged and pushed to a container registry (e.g., Docker Hub, GitHub Packages, or AWS ECR).   
+
+5- EnvironmentsEnvironments: staging (for pre-production validation) and production (live user environment).   
+ Human Approval: Required before promoting/deploying the build to the production environment to ensure manual quality    gates and prevent unauthorized releases.    
+
+6- Fail FastFirst running job: The lint (or test) job should run first.   
+ Why: It follows the "fail fast" principle by quickly catching syntax errors, style issues, or broken unit tests within seconds, saving compute time and preventing unnecessary Docker builds or deployment attempts when the code is broken.

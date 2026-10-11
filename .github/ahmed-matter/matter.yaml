@@ -1,0 +1,34 @@
+name: matter
+
+run-name: Deploy to ${{ inputs.env }} by @${{ github.actor }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      env:
+        description: "Environment to run"
+        required: true
+        default: dev
+        type: choice
+        options:
+          - dev
+          - prod
+
+jobs:
+  dev:
+    if: ${{ inputs.env == 'dev' }}
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run dev job
+        run: echo "Running DEV job"
+
+  prod:
+    if: ${{ inputs.env == 'prod' }}
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run prod job
+        run: echo "Running PROD job"
