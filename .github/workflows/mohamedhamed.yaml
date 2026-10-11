@@ -1,0 +1,29 @@
+name: Mohamed Hamed Task 2 Workflow
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Build Job
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Run Build Step
+        run: |
+          echo "Running the Build job successfully!"
+
+  echo:
+    name: Echo Job
+    needs: build
+    runs-on: ubuntu-latest
+    if: success()
+    steps:
+      - name: Run Echo Step
+        run: |
+          echo "Hello from Mohamed Hamed - Task 2 Echo Job completed!"
