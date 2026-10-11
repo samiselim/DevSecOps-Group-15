@@ -1,0 +1,23 @@
+name: calculator workflow test
+run-name: calculator workflow test ${{ github.run_number }}
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: run calculator app
+        run: |
+          python3 calc.py
