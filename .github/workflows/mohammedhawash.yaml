@@ -1,0 +1,35 @@
+name: mohammedhawash-workflow
+run-name: ${{github.actor}} is testing workflow
+
+on: 
+  workflow_dispatch:
+    inputs:
+     env: 
+      type: choice 
+      default: 
+      options: 
+       - dev
+       - prod 
+
+jobs:
+ prod-job:
+   if: inputs.env == 'prod'
+   runs-on: ubuntu-latest
+   steps:
+    - name: "echo message"
+      run: |
+          echo "this mohammedhawash from prod " > text.txt
+          cat text.txt
+ 
+ dev-job:
+   if: inputs.env == 'dev'
+   runs-on: ubuntu-latest
+   steps:
+    - name: "echo message"
+      run: |
+           echo "this mohammedhawash from env " > text.txt 
+           cat text.txt
+    - name: What files are here
+      run: ls -la  
+
+  
