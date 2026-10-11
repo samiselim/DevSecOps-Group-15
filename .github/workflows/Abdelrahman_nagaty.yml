@@ -21,9 +21,9 @@ jobs:
     environment: dev
     steps:
       - name: echo dev
-        run: echo "runing by nagaty@dev" > myecho.md
-      - name: Display dev
-        run: cat ./myecho.md
+        run: echo "runing by nagaty@dev"
+      - name: list files
+        run: ll
 
   prod:
     if: ${{ inputs.env == 'prod' }}
