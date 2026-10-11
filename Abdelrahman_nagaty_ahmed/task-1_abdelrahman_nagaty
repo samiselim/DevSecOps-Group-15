@@ -1,0 +1,12 @@
+triggers: pull requests to main and pushes to main. on PR  run the checks, on push to main run everything and deploy.
+
+jobs: secret scan,  tests and dependency .0 scan. then build the docker image , then scan the image, push it, deploy to staging, then deploy to prod.
+
+steps for test job: checkout the code, setup python, pip install requirments, run pytest.
+
+artifact: the docker image, tagged with the commit sha.
+
+environments: dev/ci, staging, prod. prod needs approval it.
+
+fail fast: secret scan  should run first, so if something is wrong we stop early.
+hotfix
